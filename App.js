@@ -1,28 +1,44 @@
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
 export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { text: '' };
+  }
+
+  onChangeText = (text) => this.setState({ text });
+
   render() {
     return (
-      <View style={{
-        flex: 1, 
-        flexDirection: 'row',
-        justifyContent: 'center'}}>
-        <View style={{width: 50, height: 50, backgroundColor: 'powderblue'}} />
-        <View style={{width: 50, height: 50, backgroundColor: 'skyblue'}} />
-        <View style={{width: 50, height: 50, backgroundColor: 'steelblue'}} />
+      <View style={styles.view}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Type here to translate!"
+          onChangeText={this.onChangeText}
+        />
+        <Text style={styles.text}>
+          {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
+        </Text>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  bigblue: {
-    color: 'blue',
-    fontWeight: 'bold',
-    fontSize: 30,
+  view: {
+    padding: 10,
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  red: {
-    color: 'red',
+  textInput: {
+    height: 40,
+    fontSize: 24,
+  },
+  text: {
+    padding: 10,
+    fontSize: 42,
   },
 });
